@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
+    <context-param>
+        <description>System variable for DB connection, e.g. CLEARDB_DATABASE_URL : mysql://user:pwd@localhost/dbname?reconect=true</description>
+        <param-name>DatabaseUrlSystemVariable</param-name>
+        <param-value>CLEARDB_DATABASE_URL</param-value>
+    </context-param>
+    <context-param>
+        <description>Hibernate config file</description>
+        <param-name>HibernateConfigFile</param-name>
+        <param-value>hibernate.cfg.xml</param-value>
+    </context-param>
+    <context-param>
+        <description>Secret key</description>
+        <param-name>SecretKey</param-name>
+        <param-value>
+rO0ABXNyAB9qYXZheC5jcnlwdG8uc3BlYy5TZWNyZXRLZXlTcGVjW0cLZuIwYU0CAAJMAAlhbGdv
+cml0aG10ABJMamF2YS9sYW5nL1N0cmluZztbAANrZXl0AAJbQnhwdAADREVTdXIAAltCrPMX+AYI
+VOACAAB4cAAAAAiAFkA97zc7ug==
+        </param-value>
+    </context-param>
+    <listener>
+        <description>ServletContextListener</description>
+        <listener-class>com.mazars.management.service.ContextLifeCycleListener</listener-class>
+    </listener>
+    <listener>
+        <listener-class>com.sun.xml.ws.transport.http.servlet.WSServletContextListener</listener-class>
+    </listener>
+    <servlet>
+        <servlet-name>ProjectCode</servlet-name>
+        <servlet-class>com.sun.xml.ws.transport.http.servlet.WSServlet</servlet-class>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+    <servlet>
+        <servlet-name>InvoiceRequest</servlet-name>
+        <servlet-class>com.sun.xml.ws.transport.http.servlet.WSServlet</servlet-class>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+    <servlet>
+        <servlet-name>Client</servlet-name>
+        <servlet-class>com.sun.xml.ws.transport.http.servlet.WSServlet</servlet-class>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+    <servlet>
+        <servlet-name>HR</servlet-name>
+        <servlet-class>com.sun.xml.ws.transport.http.servlet.WSServlet</servlet-class>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ProjectCode</servlet-name>
+        <url-pattern>/ProjectCode</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>InvoiceRequest</servlet-name>
+        <url-pattern>/InvoiceRequest</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Client</servlet-name>
+        <url-pattern>/Client</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>HR</servlet-name>
+        <url-pattern>/HR</url-pattern>
+    </servlet-mapping>
+    <session-config>
+        <session-timeout>
+            30
+        </session-timeout>
+    </session-config>
+    <error-page>
+        <error-code>404</error-code>
+        <location>/pages/en/page404.jsp</location>
+    </error-page>
+</web-app>

@@ -1,0 +1,151 @@
+<?xml version='1.0' encoding='UTF-8'?><wsdl:definitions name="MasterDataImportService" targetNamespace="http://integrations.hds-group.com/hub/expnote/ws/MasterData" xmlns:ns1="http://schemas.hds-group.org/intergration/errors" xmlns:ns2="http://schemas.xmlsoap.org/soap/http" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://integrations.hds-group.com/hub/expnote/ws/MasterData" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <wsdl:types>
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="unqualified" targetNamespace="http://schemas.hds-group.org/intergration/errors" xmlns="http://schemas.hds-group.org/intergration/errors" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:simpleType name="ErrorCode">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="INSERT_SERVER_ERROR"/>
+      <xs:enumeration value="UPDATE_SERVER_ERROR"/>
+      <xs:enumeration value="COMMIT_SERVER_ERROR"/>
+      <xs:enumeration value="COMPANY_NOT_FOUND"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="HDSWeb" type="HDSWeb"/>
+  <xs:complexType name="HDSWeb">
+    <xs:sequence>
+      <xs:element name="errorInfo" nillable="true" type="ErrorCode"/>
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>
+<xs:schema elementFormDefault="unqualified" targetNamespace="http://integrations.hds-group.com/hub/expnote/ws/MasterData" version="1.0" xmlns:tns="http://integrations.hds-group.com/hub/expnote/ws/MasterData" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+<xs:element name="Project" type="tns:expNoteProject"/>
+<xs:element name="importExpNoteProjects" type="tns:importExpNoteProjects"/>
+<xs:element name="importExpNoteProjectsResponse" type="tns:importExpNoteProjectsResponse"/>
+<xs:element name="upsertExpNoteProjectsWithPrimaryKey" type="tns:upsertExpNoteProjectsWithPrimaryKey"/>
+<xs:element name="upsertExpNoteProjectsWithPrimaryKeyResponse" type="tns:upsertExpNoteProjectsWithPrimaryKeyResponse"/>
+<xs:complexType name="upsertExpNoteProjectsWithPrimaryKey">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="authenticationKey" type="tns:credential"/>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="project" type="tns:expNoteProject"/>
+      <xs:element minOccurs="0" name="projectPK" type="tns:ProjectPrimaryKey"/>
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="credential">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="key" type="xs:string"/>
+      <xs:element minOccurs="0" name="user" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="expNoteProject">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="projectName" type="xs:string"/>
+      <xs:element minOccurs="0" name="client" type="xs:string"/>
+      <xs:element minOccurs="0" name="department" type="xs:string"/>
+      <xs:element minOccurs="0" name="activity" type="xs:string"/>
+      <xs:element minOccurs="0" name="disbursement" type="xs:string"/>
+      <xs:element minOccurs="0" name="responsible" type="xs:string"/>
+      <xs:element minOccurs="0" name="projectDeactivationDate" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="upsertExpNoteProjectsWithPrimaryKeyResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="tns:expNoteImportResult"/>
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="expNoteImportResult">
+    <xs:sequence>
+      <xs:element name="insertedNumberOfRecords" type="xs:int"/>
+      <xs:element name="updatedNumberOfRecords" type="xs:int"/>
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="importExpNoteProjects">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="authenticationKey" type="tns:credential"/>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="project" type="tns:expNoteProject"/>
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="importExpNoteProjectsResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="tns:expNoteImportResult"/>
+    </xs:sequence>
+  </xs:complexType>
+<xs:simpleType name="ProjectPrimaryKey">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="PROJECT_NAME"/>
+      <xs:enumeration value="CLIENT"/>
+      <xs:enumeration value="ACTIVITY"/>
+      <xs:enumeration value="RESPONSIBLE"/>
+    </xs:restriction>
+  </xs:simpleType>
+</xs:schema>
+  </wsdl:types>
+  <wsdl:message name="upsertExpNoteProjectsWithPrimaryKey">
+    <wsdl:part element="tns:upsertExpNoteProjectsWithPrimaryKey" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="upsertExpNoteProjectsWithPrimaryKeyResponse">
+    <wsdl:part element="tns:upsertExpNoteProjectsWithPrimaryKeyResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="importExpNoteProjectsResponse">
+    <wsdl:part element="tns:importExpNoteProjectsResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="HDSWebFault">
+    <wsdl:part element="ns1:HDSWeb" name="HDSWebFault">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="importExpNoteProjects">
+    <wsdl:part element="tns:importExpNoteProjects" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="MasterDataImportService">
+    <wsdl:operation name="upsertExpNoteProjectsWithPrimaryKey">
+      <wsdl:input message="tns:upsertExpNoteProjectsWithPrimaryKey" name="upsertExpNoteProjectsWithPrimaryKey">
+    </wsdl:input>
+      <wsdl:output message="tns:upsertExpNoteProjectsWithPrimaryKeyResponse" name="upsertExpNoteProjectsWithPrimaryKeyResponse">
+    </wsdl:output>
+      <wsdl:fault message="tns:HDSWebFault" name="HDSWebFault">
+    </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="importExpNoteProjects">
+      <wsdl:input message="tns:importExpNoteProjects" name="importExpNoteProjects">
+    </wsdl:input>
+      <wsdl:output message="tns:importExpNoteProjectsResponse" name="importExpNoteProjectsResponse">
+    </wsdl:output>
+      <wsdl:fault message="tns:HDSWebFault" name="HDSWebFault">
+    </wsdl:fault>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="MasterDataImportServiceSoapBinding" type="tns:MasterDataImportService">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="upsertExpNoteProjectsWithPrimaryKey">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="upsertExpNoteProjectsWithPrimaryKey">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="upsertExpNoteProjectsWithPrimaryKeyResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="HDSWebFault">
+        <soap:fault name="HDSWebFault" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="importExpNoteProjects">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="importExpNoteProjects">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="importExpNoteProjectsResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="HDSWebFault">
+        <soap:fault name="HDSWebFault" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="MasterDataImportService">
+    <wsdl:port binding="tns:MasterDataImportServiceSoapBinding" name="MasterDataImport">
+      <soap:address location="https://integrations.hds-group.com/HDSHubExpNoteWebServices/services"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
