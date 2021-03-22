@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.mazars.management.db.domain">
+  <class name="NaturalPerson" table="natural_person">
+    <id column="id" name="id">
+      <generator class="native"/>
+    </id>
+    <set inverse="true" name="employees">
+      <key>
+        <column name="natural_person_id" not-null="true"/>
+      </key>
+      <one-to-many class="Employee"/>
+    </set>    
+  </class>
+</hibernate-mapping>

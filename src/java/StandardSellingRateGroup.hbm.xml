@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.mazars.management.db.domain">
+  <class name="StandardSellingRateGroup" table="standard_selling_rate_group">
+    <id column="id" name="id">
+      <generator class="native"/>
+    </id>
+    <property name="start" column="startDate" not-null="true"/>
+    <property name="end" column="endDate" />
+    <many-to-one class="Currency" name="currency">
+      <column name="currency_id" not-null="true"/>
+    </many-to-one>
+    <many-to-one class="Subdepartment" name="subdepartment">
+      <column name="subdepartment_id" not-null="true"/>
+    </many-to-one>
+    <set inverse="true" name="standardSellingRates">
+      <key>
+        <column name="standard_selling_rate_group_id" not-null="true"/>
+      </key>
+      <one-to-many class="StandardSellingRate"/>
+    </set>
+  </class>
+</hibernate-mapping>

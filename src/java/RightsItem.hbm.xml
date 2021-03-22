@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.mazars.management.db.domain">
+  <class name="RightsItem" table="rights_item">
+    <id column="id" name="id">
+      <generator class="native"/>
+    </id>
+    <many-to-one class="Employee" name="employee">
+      <column name="employee_id" not-null="true"/>
+    </many-to-one>
+    <many-to-one class="Module" name="module">
+      <column name="module_id" not-null="true"/>
+    </many-to-one>
+    <many-to-one class="Subdepartment" name="subdepartment">
+      <column name="subdepartment_id" not-null="true"/>
+    </many-to-one>
+  </class>
+</hibernate-mapping>

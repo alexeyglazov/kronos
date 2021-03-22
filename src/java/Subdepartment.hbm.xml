@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.mazars.management.db.domain">
+  <class name="Subdepartment" table="subdepartment">
+    <id column="id" name="id">
+      <generator class="native"/>
+    </id>
+    <property name="name"/>
+    <property name="codeName"/>
+    <property name="description"/>
+    <property name="isActive" not-null="true"/>
+    <many-to-one class="Department" column="department_id" name="department" not-null="true"/>
+    <set inverse="true" name="subdepartmentClientLinks">
+      <key>
+        <column name="subdepartment_id" not-null="true"/>
+      </key>
+      <one-to-many class="SubdepartmentClientLink"/>
+    </set>    
+    <set inverse="true" name="activities" table="activity">
+      <key>
+        <column name="subdepartment_id" not-null="true"/>
+      </key>
+      <one-to-many class="Activity"/>
+    </set>
+    
+    <set inverse="true" name="positions" table="position">
+      <key>
+        <column name="subdepartment_id" not-null="true"/>
+      </key>
+      <one-to-many class="Position"/>
+    </set>
+    
+    <set inverse="true" name="taskTypes" table="task_type">
+      <key>
+        <column name="subdepartment_id" not-null="true"/>
+      </key>
+      <one-to-many class="TaskType"/>
+    </set>
+    
+    <set inverse="true" name="planningTypes" table="planning_type">
+      <key>
+        <column name="subdepartment_id" not-null="true"/>
+      </key>
+      <one-to-many class="PlanningType"/>
+    </set>
+    
+    <set inverse="true" name="projectCodes" table="project_code">
+      <key>
+        <column name="subdepartment_id" not-null="true"/>
+      </key>
+      <one-to-many class="ProjectCode"/>
+    </set>
+    
+    <set inverse="true" name="rightsItems" table="rights_item">
+      <key>
+        <column name="subdepartment_id" not-null="true"/>
+      </key>
+      <one-to-many class="RightsItem"/>
+    </set>
+    
+    <set inverse="true" name="employeeSubdepartmentHistoryItems" table="employee_subdepartment_history_item">
+      <key>
+        <column name="subdepartment_id" not-null="true"/>
+      </key>
+      <one-to-many class="EmployeeSubdepartmentHistoryItem"/>
+    </set>
+        
+    <set inverse="true" name="standardSellingRateGroups">
+      <key>
+        <column name="subdepartment_id" not-null="true"/>
+      </key>
+      <one-to-many class="StandardSellingRateGroup"/>
+    </set>
+    
+    <set inverse="true" name="standardCostGroups">
+      <key>
+        <column name="subdepartment_id" not-null="true"/>
+      </key>
+      <one-to-many class="StandardCostGroup"/>
+    </set>
+    
+    <set inverse="true" name="projectCodeComments">
+      <key>
+        <column name="subdepartment_id" not-null="true"/>
+      </key>
+      <one-to-many class="ProjectCodeComment"/>
+    </set>
+
+    <set inverse="true" name="checkingSubdepartmentSubdepartmentConflicts">
+      <key>
+        <column name="checking_subdepartment_id" not-null="true"/>
+      </key>
+      <one-to-many class="SubdepartmentConflict"/>
+    </set>    
+    <set inverse="true" name="checkedSubdepartmentSubdepartmentConflicts">
+      <key>
+        <column name="checked_subdepartment_id" not-null="true"/>
+      </key>
+      <one-to-many class="SubdepartmentConflict"/>
+    </set>
+  </class>
+</hibernate-mapping>

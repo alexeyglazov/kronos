@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.mazars.management.db.domain">
+  <class name="SubdepartmentConflict" table="subdepartment_conflict">
+    <id column="id" name="id">
+      <generator class="native"/>
+    </id>
+    <many-to-one class="Subdepartment" column="checking_subdepartment_id" name="checkingSubdepartment" not-null="true"/>
+    <many-to-one class="Subdepartment" column="checked_subdepartment_id" name="checkedSubdepartment" not-null="true"/>
+  </class>
+</hibernate-mapping>

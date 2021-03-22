@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.mazars.management.db.domain">
+  <class name="OutOfPocketRequest" table="out_of_pocket_request">
+    <id column="id" name="id">
+      <generator class="native"/>
+    </id>
+    <property name="status" not-null="true"/>
+    <many-to-one class="Currency" column="currency_id" name="currency" not-null="false"/>
+    <property name="type"/>
+    <property name="amount" not-null="false"/>
+    <property length="4096" name="description" not-null="false"/>
+    <many-to-one column="project_code_id" name="projectCode" not-null="true" unique="true"/>
+    <set inverse="true" name="outOfPocketRequestHistoryItems">
+      <key>
+        <column name="out_of_pocket_request_id" not-null="true"/>
+      </key>
+      <one-to-many class="OutOfPocketRequestHistoryItem"/>
+    </set> 
+  </class>
+</hibernate-mapping>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.mazars.management.db.domain">
+  <class name="ProjectCodeConflictHistoryItem" table="project_code_conflict_history_item">
+    <id column="id" name="id">
+      <generator class="native"/>
+    </id>
+    <property name="status" not-null="true"/>
+    <many-to-one class="Employee" column="modified_by_id" name="modifiedBy" not-null="true"/>
+    <property name="modifiedAt" not-null="true"/>  
+    <property length="4096" name="comment"/>
+    <many-to-one class="ProjectCodeConflict" column="project_code_conflict_id" name="projectCodeConflict" not-null="true"/>
+  </class>
+</hibernate-mapping>

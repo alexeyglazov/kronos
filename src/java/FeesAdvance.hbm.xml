@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.mazars.management.db.domain">
+  <class name="FeesAdvance" table="fees_advance">
+    <id column="id" name="id">
+      <generator class="native"/>
+    </id>
+    <property name="isAdvance" not-null="true"/>
+    <property name="amount" not-null="true"/>
+    <property name="date" not-null="true"/>
+    <property name="stamp" not-null="false"/>
+    <many-to-one class="FeesItem" name="feesItem">
+      <column name="fees_item_id" not-null="true"/>
+    </many-to-one>
+  </class>
+</hibernate-mapping>

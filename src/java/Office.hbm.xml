@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.mazars.management.db.domain">
+  <class name="Office" table="office">
+    <id column="id" name="id">
+      <generator class="native"/>
+    </id>
+    <property name="name"/>
+    <property name="codeName"/>
+    <property name="description"/>
+    <property name="isActive" not-null="true"/>
+    <many-to-one class="Country" name="country">
+      <column name="country_id" not-null="true"/>
+    </many-to-one>
+    <set inverse="true" name="departments" table="department">
+      <key>
+        <column name="office_id" not-null="true"/>
+      </key>
+      <one-to-many class="Department"/>
+    </set>
+  </class>
+</hibernate-mapping>
