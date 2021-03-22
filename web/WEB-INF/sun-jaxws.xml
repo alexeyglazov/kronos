@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<endpoints version="2.0" xmlns="http://java.sun.com/xml/ns/jax-ws/ri/runtime">
-  <endpoint implementation="com.mazars.management.webservices.services.Client" name="Client" url-pattern="/Client"/>
-  <endpoint implementation="com.mazars.management.webservices.services.ProjectCode" name="ProjectCode" url-pattern="/ProjectCode"/>
-  <endpoint implementation="com.mazars.management.webservices.services.InvoiceRequest" name="InvoiceRequest" url-pattern="/InvoiceRequest"/>
-  <endpoint implementation="com.mazars.management.webservices.services.HR" name="HR" url-pattern="/HR"/>
-</endpoints>
