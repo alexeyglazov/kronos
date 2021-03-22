@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.mazars.management.db.domain">
+  <class name="ProjectCode" table="project_code">
+    <id column="id" name="id">
+      <generator class="native"/>
+    </id>
+    <property name="code" not-null="true"/>
+    <property name="year" not-null="true"/>
+    <property name="financialYear" not-null="false"/>
+    <property length="1024" name="description"/>
+    <property length="1024" name="comment"/>
+    <property name="createdAt" not-null="true"/>
+    <property name="modifiedAt" not-null="true"/>
+    <many-to-one class="Employee" column="created_by_id" name="createdBy" not-null="true"/>
+    <property name="isClosed"/>
+    <property name="closedAt"/>
+    <many-to-one class="Employee" column="closed_by_id" name="closedBy" not-null="false"/>
+    <many-to-one class="Employee" column="in_charge_person_id" name="inChargePerson" not-null="false"/>    
+    <many-to-one class="Employee" column="in_charge_partner_id" name="inChargePartner" not-null="false"/>    
+    <property name="startDate"/>
+    <property name="endDate"/>
+    <property name="isFuture"/>
+    <property name="isDead"/>
+    <property name="isHidden"/>
+    <property name="conflictStatus" not-null="false"/>
+    <property name="periodType" not-null="true"/>
+    <property name="periodQuarter"/>
+    <property name="periodMonth"/>
+    <property name="periodDate"/>
+    <property name="periodCounter"/>
+    <many-to-one class="Client" column="client_id" name="client" not-null="true"/>
+    <many-to-one class="Subdepartment" column="subdepartment_id" name="subdepartment" not-null="true"/>
+    <many-to-one class="Activity" column="activity_id" name="activity" not-null="true"/>
+    <set inverse="true" name="timeSpentItems">
+      <key column="project_code_id"/>
+      <one-to-many class="TimeSpentItem"/>
+    </set>
+    <set inverse="true" name="invoiceRequestPackets">
+      <key column="project_code_id"/>
+      <one-to-many class="InvoiceRequestPacket"/>
+    </set>
+    <one-to-one name="outOfPocketRequest" property-ref="projectCode"/>
+    <set inverse="true" name="businessTripItems">
+      <key column="project_code_id"/>
+      <one-to-many class="BusinessTripItem"/>
+    </set>
+    <one-to-one name="feesItem" property-ref="projectCode"/>
+    <one-to-one name="outOfPocketItem" property-ref="projectCode"/>
+    <one-to-one name="agreement" property-ref="projectCode"/>
+    <set inverse="true" name="planningGroupToProjectCodeLinks">
+      <key>
+        <column name="project_code_id" not-null="true"/>
+      </key>
+      <one-to-many class="PlanningGroupToProjectCodeLink"/>
+    </set>
+    <set inverse="true" name="employeeProjectCodeAccessItems">
+      <key>
+        <column name="project_code_id" not-null="true"/>
+      </key>
+      <one-to-many class="EmployeeProjectCodeAccessItem"/>
+    </set>    
+    <set inverse="true" name="projectCodeApprovements">
+      <key column="project_code_id"/>
+      <one-to-many class="ProjectCodeApprovement"/>
+    </set>
+    <set inverse="true" name="projectCodeConflicts">
+      <key column="project_code_id"/>
+      <one-to-many class="ProjectCodeConflict"/>
+    </set>
+         
+  </class>
+</hibernate-mapping>

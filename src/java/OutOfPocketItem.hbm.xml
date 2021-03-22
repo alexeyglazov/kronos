@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.mazars.management.db.domain">
+  <class name="OutOfPocketItem" table="out_of_pocket_item">
+    <id column="id" name="id">
+      <generator class="native"/>
+    </id>
+    <many-to-one class="Currency" column="currency_id" name="currency" not-null="false"/>
+    <many-to-one class="Currency" column="out_of_pocket_invoice_currency_id" name="outOfPocketInvoiceCurrency" not-null="true"/>
+    <many-to-one class="Currency" column="out_of_pocket_payment_currency_id" name="outOfPocketPaymentCurrency" not-null="true"/>
+    <many-to-one class="Currency" column="out_of_pocket_act_currency_id" name="outOfPocketActCurrency" not-null="true"/>
+    <property name="type"/>
+    <property name="amount" not-null="false"/>
+    <many-to-one column="project_code_id" name="projectCode" not-null="true" unique="true"/>
+    <set inverse="true" name="outOfPocketInvoices">
+      <key>
+        <column name="out_of_pocket_item_id" not-null="true"/>
+      </key>
+      <one-to-many class="OutOfPocketInvoice"/>
+    </set>
+    <set inverse="true" name="outOfPocketPayments">
+      <key>
+        <column name="out_of_pocket_item_id" not-null="true"/>
+      </key>
+      <one-to-many class="OutOfPocketPayment"/>
+    </set>
+    <set inverse="true" name="outOfPocketActs">
+      <key>
+        <column name="out_of_pocket_item_id" not-null="true"/>
+      </key>
+      <one-to-many class="OutOfPocketAct"/>
+    </set>
+  </class>
+</hibernate-mapping>

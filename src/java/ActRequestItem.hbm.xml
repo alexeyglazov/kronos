@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.mazars.management.db.domain">
+  <class name="ActRequestItem" table="act_request_item">
+    <id column="id" name="id">
+      <generator class="native"/>
+    </id>
+    <property length="4096" name="name"/>
+    <property name="amount"/>
+    <many-to-one class="ActRequest" name="actRequest">
+      <column name="act_request_id" not-null="true"/>
+    </many-to-one>
+  </class>
+</hibernate-mapping>

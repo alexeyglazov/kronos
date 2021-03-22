@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.mazars.management.db.domain">
+  <class name="OutOfPocketInvoice" table="out_of_pocket_invoice">
+    <id column="id" name="id">
+      <generator class="native"/>
+    </id>
+    <property name="amount"/>
+    <property name="vatIncludedAmount"/>
+    <property name="date"/>
+    <property name="reference"/>
+    <property name="stamp" not-null="false"/>
+    <many-to-one class="OutOfPocketItem" name="outOfPocketItem">
+      <column name="out_of_pocket_item_id" not-null="true"/>
+    </many-to-one>
+  </class>
+</hibernate-mapping>

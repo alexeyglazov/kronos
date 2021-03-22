@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.mazars.management.db.domain">
+  <class name="PlanningGroup" table="planning_group">
+    <id column="id" name="id">
+      <generator class="native"/>
+    </id>
+    <property name="name"/>
+    <property name="description"/>
+    <property name="isApproved" not-null="true"/>
+    <many-to-one class="PlanningType" column="planning_type_id" name="planningType" not-null="true"/>
+    <many-to-one class="Subdepartment" column="target_subdepartment_id" name="targetSubdepartment" not-null="true"/>
+    <many-to-one class="Employee" column="in_charge_person_id" name="inChargePerson" not-null="false"/>
+    <many-to-one class="Client" column="client_id" name="client" not-null="false"/>
+    <many-to-one class="Task" column="task_id" name="task" not-null="false"/>
+    <set inverse="true" name="planningItems">
+      <key>
+        <column name="planning_group_id" not-null="false"/>
+      </key>
+      <one-to-many class="PlanningItem"/>
+    </set>
+    <set inverse="true" name="planningGroupToProjectCodeLinks">
+      <key>
+        <column name="planning_group_id" not-null="true"/>
+      </key>
+      <one-to-many class="PlanningGroupToProjectCodeLink"/>
+    </set>
+  </class>
+</hibernate-mapping>
